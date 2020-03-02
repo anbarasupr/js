@@ -12,11 +12,11 @@ var scoreboard = function () {
         // loop over all the results and create the html for the scoreboard
         output += '<table class="table table-hover table-condensed" style="width:90%">';
         output += '<tr>';
-        output += '<td>No</td>';
-        output += '<td>Player Name</td>';
-        output += '<td>Factor</td>';
-        output += '<td>Number of Problems</td>';
-        output += '<td>Score</td>';
+        output += '<th>No</th>';
+        output += '<th>Player Name</th>';
+        output += '<th>Factor</th>';
+        output += '<th>Number of Problems</th>';
+        output += '<th>Score</th>';
         output += '</tr>';
         for (var index = 0; index < results.length; index++) {
             var result = results[index];

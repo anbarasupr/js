@@ -14,7 +14,7 @@ var game = function () {
             gameForm += '<label for="answer' + i + '" class="col-sm-5 control-label">';
             gameForm += factorElement.value + ' x ' + i + ' = </label>';
             gameForm += '<div class="col-sm-2">';
-            gameForm += '<input type="text" class="form-control" id="answer'+i+'"/>';
+            gameForm += '<input type="text" class="form-control" id="answer' + i + '"/>';
             gameForm += '</div>';
             gameForm += '</div>';
         }
@@ -34,7 +34,7 @@ var game = function () {
         // loop through the text boxes and calculate the number that are correct
         for (i = 1; i <= problemsInGame; i++) {
             var answer = document.getElementById('answer' + i).value;
-            if (i * factorElement.value == answer) {
+            if (factorElement.value && (i * factorElement.value == answer)) {
                 score++;
             }
         }
@@ -46,7 +46,7 @@ var game = function () {
             problems: problemsInGame,
             factor: factorElement.value
         };
-
+        console.log('Current User score', result);
 
         //add the result and update the scoreboard
         scoreboard.addResult(result);
