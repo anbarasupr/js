@@ -31,7 +31,7 @@ Structure of our demo app:
  
 
 
-Module Patterns in ES5: (Pure ES5 javascript code without any external libraries)
+1. Module Patterns in ES5: (Pure ES5 javascript code without any external libraries)
 
 	1.Immediately-invoked function expressions (IIFE)
 	2.Revealing module pattern
@@ -54,3 +54,58 @@ Revealing Module pattern:
 	-> This pattern comes in two flavours
 		- Singleton
 		- Constructor functions
+		
+		
+2. Module Formats and Loaders:
+
+	Module Format -> syntax (Just a syntax to define a module. They exist independent of any particular loader.)
+	Module loader -> execution (execute the module)
+	
+	It is simiiar to the javascript and browser. The javascript is exist independent of any particular browser. It is just a syntax, that requires a execution environment, that environment is provided by browser which we develop independently and the browser know how to interpret the syntax.
+	
+	Similiarly, module format like AMD format is exist independently of any particular module loader. It requires a loader that actually interprets & execute the module. AMD modules are loaded with different loaders like RequireJS, Curl.js and SystemJs.
+	
+	Non-Native Formats - 
+		1. AMD - Asynchronous Module Definition
+		2. Commonjs
+		3. UMD - Universal Module  Definition
+		4. System.register
+	Native Formats
+		5. ES2015
+		
+		
+		
+		1. AMD - supports loading modules asynchronously.
+		2. CommonJS - More often used as part of node js applications. Node includes built in module loader that supports the commonjs.
+		3. UMD - single format that attempts to be compatible both AMD & CommonJS formats. It would be supported by systemjs loader and require js loader. It is not a format to directly code into UMD. We target the UMD format as part of compilaton process from another language like typescript. 
+		For instance, if we are developing our code with typescript or the newer ES2015 javascript language, we can configure the the typescript compiler or babel transpiler for ES2015 to output the modules into UMD for you.
+		4. System.register - It is designed to work with very popular SystemJs module loader. SystemJs loads lots of different modules said above.
+		
+		Note: Above said 4 formats are non native formats and that means the syntax used to define the modules are not built on javascript language. Their specification and convention is independent of javascript language itsef.
+		
+		5. ES2015 - ES2015 is contrast to above 4 formats. It is the newer version of javascript language and it is the first version of javascript language which have built in support for modules as we call it as native format.
+		
+		Browsers dont yet support for all of the feature of ES2015 including the new module systax. Writing code in ES2015 and using native module syntax requires a transpilation step that outputs your javascript module into one of these other formats that can be executed in browser with one of their compatible module loader.
+		
+		ES2015 (Native) -> Transpilation Step -> Non-Native formats (AMD,UMD,System.register or CommonJS) -> Use module loader to execute in browser
+		
+		
+Module loaders:
+	Not all the module loaders support all module formats.
+	
+	RequireJS -> loads AMD Format
+	SystemJs  -> loads AMD, CommonJS, UMD & System.register (we call it as universal module loader, since it loads all/most)
+	
+	
+	
+	AMD Format:
+	define is not a buit in javascript function. It wil be implemented by the module loader,which we use in our project.
+	It takes 2 parameters. one with a list of dependencies and another with the module behviour. The module loader see the dependencies given in the first parameter and loads them all first before continuinng the original module behaviour.
+	
+	Once the player module is loaded and it creates the instance for it and it is passed as parameter to the module.
+	define(['./player'],function(player){
+	  console.log('Starting game for '+player.getName());
+	});
+		
+		
+	
