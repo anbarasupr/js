@@ -54,10 +54,15 @@ Revealing Module pattern:
 	-> This pattern comes in two flavours
 		- Singleton
 		- Constructor functions
-		
+
+Summary:
+The ES5 version of javascript is not designed with modules in mind. However the patters evolved over the years, the IIFE and Revealing Module pattern have some of the benefit and they are associated with modules. I dont pretend these patterns are perfect, but they do better organise the code that we write.
 		
 2. Module Formats and Loaders:
 
+	A couple of module formats were developed to fill the gap that exist in revealing module pattern.
+	using those module formats and the compatible module loader, it is easy to write modular code and have better organise and more maintainable code.
+	
 	Module Format -> syntax (Just a syntax to define a module. They exist independent of any particular loader.)
 	Module loader -> execution (execute the module)
 	
