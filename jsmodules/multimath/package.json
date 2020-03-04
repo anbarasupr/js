@@ -13,6 +13,7 @@
     "http-server": "^0.12.1"
   },
   "dependencies": {
-    "bootstrap": "^3.4.1"
+    "bootstrap": "^3.4.1",
+    "requirejs": "^2.3.6"
   }
 }
