@@ -1,3 +1,21 @@
+Intro:
+	Javascript Module fundamentals
+		I am gonna start with javascript module fundamentals and then we slowly move on to angular because all the bundles that we create for angular is internally makes use of one of this modules. 
+		Knowing about those modules is most important.
+		
+		I have taken a small app and i am going to show and convert this app in all different types of modules. I convert this app to angular with both feature and non-feature modules setup, how the communication is happening within the module & component system.
+				
+		-> Javascript is more popular language which is being used in todays webapplications
+		-> This means writing modular and maintainable code is more important.
+		
+	Below are the topics that we are going to learn in this session.
+		Popular Module Patters (The AMD and CommonJS patterns)
+		Client Side Module Loaders
+		ES2015 modules
+		Module Bundlers
+
+
+Javascript Module fundamentals:
 Module:
 A group of code and data related to a  particular piece of functionality.
 It encapsulates implementation details
@@ -6,13 +24,21 @@ Combined with other modules to build a larger application.
 Packaging and distribution is easy.
 
 The Goals of Modularity:
-	1. Create higher level of abstractions - (Let you think about your application in larger building blocks. Modules are chunks of functionality instead of individual function.)
-	2. Encapsulation - hides the implementation details
-	3. Reusability - reuse in same or across multiple app
-	4. Simplifed dependency management - every module will declare all other modules that are required to function properly. There would be a tooling support to pull all those modules only when they are needed. For instance, if i create a department module which depends on a employee module, the department module should explicitly declare the dependency and my tool should pull it for me so we dont need to remember all those.
-	If we assemble a web application with lots of different inner related javascript files, then there is a pain to include all those scripts in html file with proper order.
-	A Correctly implemented good module system will go away this issue.	
+	1. Create higher level of abstractions - (Let you think about your application in larger building blocks. Modules let us think in chunks of functionality instead of individual function.)
+	2. Encapsulation - Modules should define a clear public api to the consumer of the modules but it hides the implementation details
+	3. Reusability - reuse in different parts of same application or across multiple app
+	4. Simplifed dependency management - every module will declare all other modules that are required to function properly. There would be a tooling support to pull all those modules together only when they are needed. For instance, if i create a department module which depends on a employee module, the department module should explicitly declare the dependency and my tool should pull it for me so we dont need to remember all those.
+	If we assemble a web application with lots of different but inner related javascript files, then there is a pain to include all those scripts in html file with proper order.
+	A Correctly implemented good module system will go away this problem.
 	
+
+[ Let you think about your application in larger building blocks. Consider your are city planner and you given a task to create a city. In such case, you wouldnt want to think about every brick when we planning a new city. I want to think about whole buildings and how to lay them out of my city.you
+
+When i ask you about our application. Can someone tell me what is our opstation application does?
+When thinking about our application, we say our application does so many workflow activities like ... When i ask about our application, The first thing come to our mind is these workflow activities which are considered as the large building blocks of our application.
+
+These large building blocks are nothing but modules. Modules enables the similiar though process and let us think in chunks of functionality instead of individual function. ]
+
 
 Course Modules:
 	1. Module Patterns in ES5 - Couple of patterns to implement pure ES5 javascript without including any external libraries.
@@ -57,6 +83,20 @@ Revealing Module pattern:
 
 Summary:
 The ES5 version of javascript is not designed with modules in mind. However the patters evolved over the years, the IIFE and Revealing Module pattern have some of the benefit and they are associated with modules. I dont pretend these patterns are perfect, but they do better organise the code that we write.
+		
+*******************************************
+
+2. Overview
+We are going to redefine the syntax where third party library understand that syntax and allows you to write clean modular code that doesnt pollute the global scope.
+
+		Relationship between module formats and module loaders:
+			Module Formats
+				-	Native & Non-Native Formats	
+				-	Asynchronous Module Definition (AMD)
+				-	CommonJS
+			Module Loaders
+				-	RequireJS
+				-	SystemJS
 		
 2. Module Formats and Loaders:
 
