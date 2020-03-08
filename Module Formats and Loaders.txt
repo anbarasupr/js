@@ -1,0 +1,184 @@
+Module Formats and Loaders:
+
+Overview
+We are going to redefine the syntax where third party library understand that syntax and allows you to write clean modular code that doesnt pollute the global scope and also have dependency management system.
+
+Relationship between module formats and module loaders:
+	
+	Module Formats
+		-	Native & Non-Native Formats	
+		-	Asynchronous Module Definition (AMD)
+		-	CommonJS
+	Module Loaders
+		-	RequireJS
+		-	SystemJS
+
+Module Formats and Loaders:
+
+	A couple of module formats were developed to fill the gap that exist in revealing module pattern.
+	using those module formats and the compatible module loader, it is easy to write bettter modular code and more organisable and maintainable code.
+	
+	Module Format -> syntax (Just a syntax to define a module. They exist independent of any particular loader.)
+	Module loader -> execution (execute the module)
+	
+	It is similiar to the javascript and browser. The javascript is exist independent of any particular browser. It is just a syntax, that requires a execution environment, that environment is provided by browser which we develop code independently and the browser know how to interpret the syntax.
+	
+	Similiarly, module format like AMD format is exist independently of any particular module loader. It requires a loader that actually interprets & execute the module. AMD modules are loaded with different loaders like RequireJS, Curl.js and SystemJs.
+	
+	Module Formats:
+		Non-Native Formats - 
+			1. AMD - Asynchronous Module Definition (supports loading modules asynchronously)
+			
+			2. Commonjs - More often used as part of node js applications. Node includes built in module loader that supports the commonjs.
+			
+			3. UMD - Universal Module  Definition (single format that attempts to be compatible both AMD & CommonJS formats. It would be supported by both systemjs loader and require js loader. It is not a format to directly code into UMD. We target the UMD format as part of compilaton process from another language like typescript. 
+		For instance, if we are developing our code with typescript or the newer ES2015 javascript language, we can configure the the typescript compiler or babel transpiler for ES2015 to output the modules into UMD for you.)
+		
+			4. System.register - It is designed to work with very popular SystemJs module loader. SystemJs loads lots of different modules said above.
+			
+		Native Formats
+			5. ES2015 - ES2015 is contrast to above 4 formats. It is the newer version of javascript language and it is the first version of javascript language which have built in support for modules as we call it as native format.
+		
+			Browsers dont yet support for all of the feature of ES2015 including the new module systax. Writing code in ES2015 and using native module syntax requires a transpilation step that outputs your javascript module into one of these other formats that can be executed in browser with one of their compatible module loader.
+		
+			ES2015 (Native) -> Transpilation Step -> Non-Native formats (AMD,UMD,System.register or CommonJS) -> Use module loader to execute in browser
+		
+		
+Module loaders:
+	Not all the module loaders support all module formats.
+	
+	RequireJS -> loads AMD Format
+	SystemJs  -> loads AMD, CommonJS, UMD & System.register (we call it as universal module loader, since it loads allmost)
+	
+AMD Format:
+	// game.js
+	define(['./player'],function(player){
+	  console.log('Starting game for '+player.getName());
+	  
+	  function calculateScore(){}
+	  
+	  //public api
+	  return {
+		calculateScore:calculateScore
+	  };
+	});
+	
+	define is not a built in javascript function. It will be implemented by the module loader, which we use in our project. 
+	All module loaders that support AMD will have the method definition for define().
+	
+	It takes 2 parameters. one with a array of dependencies and another is a function which is the game module. The module loader see the dependencies given in the first parameter and loads them all first before continuing the original module behavior.
+	
+		
+	I am specifying here the game module is depends on player module.
+	The (./player) string i am passing here is relative path to the javascript file that contains the player module. I dont have to include the js extension also.
+	
+		
+	Once the player module is loaded and it creates the instance for the player module and that instance is passed as a parameter to game module. In the game module, i just given the name as player to match with player module that is passed in. 
+	
+	Inside the game function, i can define the new game module much as similiar to the revealing module pattern. We can access the dependencies that are passed in to the game module.
+	
+	I can also write any function to the game module whatever we are writing inside the game module which are private to the game module and cannot access outside of it.
+	
+	So we need a public api to expose its functionality and the public api is a object literal that contains properties that maps to the private implementation of the game module.
+	
+	This is much similiar like revealing module patter which we pass as a second parameter to the define function.
+	
+	
+	AMD provides,
+	
+	Encapsulation,
+	Doesnt pollute global scope. - there is no global variables are created to hold the module and it doesnt create any global variables in window object. Without creating any global variables, we can refer one module to another module.
+	Expose a public api
+	dependency management system - the dependencies between the modules are well handled by the amd module system.
+	
+	
+	Demo:
+	npm install requirejs --save
+	
+	<script data-main="djs/app" src="node_modules/requirejs/require.js"></script>
+	
+	
+	
+CommonJS Format:
+	It is very similiar to AMD.
+	It allows us to express dependencies, which will be loaded by compatible module loader.
+	we can define a api to each of our modules.
+	
+	//game.js
+	var player = require('./player');
+	
+	dependencies should be declared using require function and assign it to variable to hold the module reference.
+	The require function is part of the compatible commonjs module loader like systemjs and it takes care of downloading the player module from the server and invoking its instance and return back to us.
+	
+	we can use the player module reference in the game module.
+	
+	we can new behaviors to the game module
+	function printGame(){}
+	function calculateScore(){}
+	
+	
+	Inorder to expose the functions and other properties as part of this module API, i just add them as a new members  to the export object.
+	
+	Export Object:
+	Like the require function above, the export is a special object that commonjs module loader will use to expose the module implementations.
+	We can expose those to different names also in export.
+	
+	exports.printGame=printGame;
+	exports.calculateScoreTest=calculateScore;
+	
+	
+	With AMD module, the body of the game module i wrapped inside the define function.
+	With CommonJS, there is no wrapping. each file is considered as a module.
+	At the top, we specify require function and it gives you the instance of your dependencies and then we write as normal functions. The syntax very easy to use here.
+	
+	
+	Export Syntax:
+	
+	exports.calculateScore=calculateScore; // one way
+	module.exports.calculateScore=calculateScore; // another way but both are equivalent
+	
+	exports={} //wrong
+	exports= function(){} // wrong
+	
+	If we want to use object literal or function to use directly in exports.
+	module.exports={}; // correct
+	module.exports=function(){} // correct
+	
+	Demo:
+	npm install systemjs --save
+	
+	<script src="node_modules/systemjs/dist/system.js"></script>
+	<script>
+	
+	System.config({
+		meta:{
+			format:'cjs' // commonjs supports several formats and it is important to specify the format here
+		}
+	});
+	
+	System.import('js/app.js');
+	</script>
+	
+Summary:
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
