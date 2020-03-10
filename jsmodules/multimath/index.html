@@ -69,7 +69,17 @@
   <script src="js/iife/game.js"></script>
   <script src="js/iife/scoreboard.js"></script> -->
 
-  <script data-main='js/amd/app' src="node_modules/requirejs/require.js"></script>
+  <!-- <script data-main='js/amd/app' src="node_modules/requirejs/require.js"></script> -->
+  <script src="node_modules/systemjs/dist/system.js"></script>
+  <script>
+    System.config({
+      meta: {
+        format: 'cjs' // commonjs supports several formats and it is important to specify the format here
+      }
+    });
+    System.import('js/commonjs/app.js');
+  </script>
+
 
 </body>
 
