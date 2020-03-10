@@ -16,7 +16,7 @@ Relationship between module formats and module loaders:
 Module Formats and Loaders:
 
 	A couple of module formats were developed to fill the gap that exist in revealing module pattern.
-	using those module formats and the compatible module loader, it is easy to write bettter modular code and more organisable and maintainable code.
+	using those module formats and the compatible module loader, it is easy to write better modular code and more organisable and maintainable code.
 	
 	Module Format -> syntax (Just a syntax to define a module. They exist independent of any particular loader.)
 	Module loader -> execution (execute the module)

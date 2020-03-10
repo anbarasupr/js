@@ -1,0 +1,114 @@
+Intro:
+
+Creating modular javascipt code is something that developers struggled to implement or years. Finally, in the ES2015 versio of javascipt language, it was brought in.
+
+We will see how to create modules using new javascript native syntax and show you how to build the applications with it today, eventhough browsers dont yet support all of the new features in ES2015.
+
+Overview:
+
+	What are ES2015 modules?
+	Similiarities and differences in relation to other module formats
+	Syntax for defining and using modules
+	Transpiling to earlier versions of javascript
+	Convert modules in the multimath app to use ES2015 modules
+	
+	
+What are ES2015 modules?
+	
+	Native modules - The AMD and commonjs are non native modules but ES2015 is a native module with build in javascript language.
+	
+	Support for modules with built-in to javascript - doesnt need any third party libraries or packages to write them. However, we will need a little help to running them untiul browsers fully implement the features of ES2015.
+	
+	Similiar to other modules formats
+			- Support for dependeny management
+			- Encapsulate implementation details
+			- Explicitly expose a public api
+	Differences from other module formats
+			- No libraries required to create modules		
+			- Currently must transpile to ES5 or AMD, commonjs
+			- Syntax
+			
+			
+ES2015 Module Workflow:
+
+Need a transpilation step to convert one version of javascipt code to another which is rom ES2015 to ES5 or AMD or commonjs or systemjs and executed with the compatable loader.
+
+Importing and Exporting Module:
+	Importing from a module:
+		- Imported items are dependencies 
+		- May import an entire module or just part of it
+		- May create a alias for imported items ( You can choose a alias which is different name to the imported items. This we can use, to exactly with the context to make more readable, we can import it with a user defined alias)
+	Exporting from a module:
+		- Expose the API of the module
+		- May export items at declaration or all at once as a list
+		- May specify a default export (we can make defaultly export an item in a module)
+		
+		
+Named Exports:
+//scoreboard.js
+//export a function
+export function addResult(newResult){}
+export function updateScoreboard(){}
+function privateFunction(){}
+
+//export a variable
+export var playerName='test';
+
+//export as a list in one shot as part of single statement
+function addResult(newResult){}
+function updateScoreboard(){}
+var homeTeam=''Trigers;
+export{addResult, updateScoreboard as showScore, homeTeam}; // alias  - Here updateScoreboard function is exposed as showScore
+
+
+//default keyword
+
+export default function addResult(newResult){} // Our module going to export atleast one item anyway
+
+
+
+Import Syntax & Variations of Import Syntax:
+
+//game.js
+import * from as scoreboard from './scoreboard.js'; - The asterik character is used to import everything in the module and give the module with a new name 'scoreboard' which we call it as alias. you do that by using as keyword folowed by the name you want to use.
+scoreboard.updateScoreboard();
+
+
+//import specific
+import {addResult, updateScoreboard} from './scoreboard.js';
+updateScoreboard();
+
+//import specific with alias
+import {updateScoreboard as updateScore} from './scoreboard.js';
+updateScore();
+
+//import default export
+import newresult from './scoreboard.js';
+
+//import default export and others with curly brace
+import newresult,{updateScoreboard} from './scoreboard.js';
+
+	
+
+//Modify code changes
+
+Transpiler:
+
+What is Babel?
+		Transpiler
+		Support most ES2015 features - support all ES2015 features including arrow functions to convert to earlier versions of javascript
+		Executed as build step - configure as part of build step before we go to productions
+		Produces clean, readable javascipt code
+		Highly configurable - gives control to which features we want to convert or not
+		Supports all of the popular module formats
+		
+
+https://bablis.io/repl
+
+npm install babel-cli --save-dev
+npm install babel-preset-es2015  --save-dev // presets con
+
+for babel transpilation:
+./node_modules/.bin/babel js --presets es2015 --out-dir build
+	
+	
