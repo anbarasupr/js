@@ -106,9 +106,11 @@ What is Babel?
 https://bablis.io/repl
 
 npm install babel-cli --save-dev
-npm install babel-preset-es2015  --save-dev // presets con
+npm install babel-preset-es2015 --save-dev // presets con
 
 for babel transpilation:
-./node_modules/.bin/babel js --presets es2015 --out-dir build
+.\"node_modules/.bin/babel" js/es2015 --presets es2015 --out-dir build
 	
+*****************************
+
 	
