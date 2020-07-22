@@ -45,10 +45,12 @@ function calculateScore() {
     var problemsInGame = getProblemCount();
     var score = 0;
     // loop through the text boxes and calculate the number that are correct
-    for (i = 1; i <= problemsInGame; i++) {
-        var answer = document.getElementById('answer' + i).value;
-        if (factorElement.value && i * factorElement.value == answer) {
-            score++;
+    for (var i = 1; i <= problemsInGame; i++) {
+        var answer = document.getElementById('answer' + i);
+        if (answer) {
+            if (factorElement.value && i * factorElement.value == answer.value) {
+                score++;
+            }
         }
     }
 

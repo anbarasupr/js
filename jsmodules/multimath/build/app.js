@@ -8,11 +8,7 @@ var _game = require('./game.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var player = require('./player.js');
-var game = require('./game.js');
-
-
-console.log('Loading Multimath with Systemjs ComonJS');
+console.log('Loading Multimath with ES2015');
 
 // console.log('player',player);
 
