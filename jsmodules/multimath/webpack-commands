@@ -1,0 +1,26 @@
+npm install webpack@1.15.0
+
+bundle the app from local installed webpack:
+.\"node_modules/.bin/webpack" ./js/webpack/app.js build/bundles/bundle.js
+
+
+bundle the app from globally installed webpack:
+webpack ./js/webpack/app.js build/bundles/bundle.js
+
+
+With custom config:
+.\"node_modules/.bin/webpack"
+
+
+
+watch mode:
+.\"node_modules/.bin/webpack" --watch
+
+webpack dev server to serve local files:
+http://localhost:3000/webpack-dev-server/index.html - show the app within iframe beneath the status bar
+http://localhost:3000 - show the app without status bar. To get live reload changes in browser, pass --inline argument like below only for this case
+
+.\"node_modules/.bin/webpack" --inline --watch -> 
+
+
+
